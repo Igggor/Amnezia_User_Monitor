@@ -11,6 +11,17 @@ CLIENTS_MAPPING = {
     "HN+o1gh0RSPGf0+pZAYjbnrgbTxgU0r28LRrEt/0hjU=": "Tema3",
     "lHh2a/Twtw+DpF4m3uAieUn3P6wQRp/2VkXr+tYevxg=": "Tema4",
     "PWs4i+t5mX2i8nFIjdni/2Dvs4iB53Ltu6jbVkjuxBA=": "Tema5",
+    "EVX7JohjUNeg6QJGRc9B/BWuqp6wN5CtztW25ziiETY=": "Ivan",
+    "D6JqN9+N3iLdWs2sejW4/At/J0kZ9qka5cjVL5Jz5Wg=": "Pavel1",
+    "wj3azub5QEOIY5AmGB9QgFBcKQznrDbCplb1lv3U2hE=": "Pavel2",
+    "/0OGqmgmSb3PF1jREFbH3B4N9x9iOaYeDmgnm0zGkSk=": "Pavel3",
+    "681Y/lZW8j2QgRO5iM5m0ko7ZC09KjTtBetJnZkLhx8=": "Pavel4",
+    "pIsRMIA54NTDU07EpbUvrOoEKP/OzNtKkV4NY3GkL1g=": "Andrey1",
+    "nTUetdxMykm67pB+yJaVi/kor1VosAL7JU8dlFXl9D4=": "Andrey2",
+    "oW6Qkhdnu5/wNXoj9afkO0GyRbXtOWRl+LH1F/kAAxo=": "Andrey3",
+    "Rw4He46Nf6HZNR1mTHgnCMqf4jYRXg8fmClVPgqGtHw=": "Vlad1",
+    "kUNmzB7sgCeZ6S++iajiS4x/hgUHqm7eYluDdSDJjHk=": "Vlad2",
+    "2+OPltlAu3JSuSjsJ7EmVqKCbNYBlFAEYeNj3F1KRV8=": "Olya",
 }
 
 # Создаем директорию для данных, если её нет
