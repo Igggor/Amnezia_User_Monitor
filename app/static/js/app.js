@@ -12,6 +12,8 @@ async function loadDashboardData() {
     try {
         const response = await fetch('/api/clients');
         const clients = await response.json();
+        clients.sort((a, b) => b.online - a.online);
+
 
         const container = document.getElementById('clients-container');
         container.innerHTML = ''; // Очищаем старый список
