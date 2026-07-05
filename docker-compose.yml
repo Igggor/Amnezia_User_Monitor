@@ -1,17 +1,12 @@
-version: '3.8'
-
 services:
   amnezia-monitor:
     build: .
-    container_name: amnezia-monitor
     ports:
       - "8080:8000"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./app:/app/app
-      - ./data:/app/data
+      # Пробрасываем папку /tmp с хост-машины внутрь контейнера
+      - /tmp:/tmp
     environment:
+      - AMNEZIA_CONTAINER_NAME=amnezia-awg
       - WG_INTERFACE=wg0
-      - DB_PATH=data/monitor.db
     restart: always
-
