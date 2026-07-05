@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
@@ -7,6 +7,7 @@ from database import init_db
 from scheduler import start_scheduler, shutdown_scheduler
 from api.clients import router as clients_router
 from pathlib import Path
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -32,7 +33,12 @@ templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 # Подключаем API
 app.include_router(clients_router)
 
-# Вместо старого read_root отдаем красивую HTML страницу
+# Роут для Prometheus
+@app.get("/metrics")
+async def metrics():
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
+
+# Отдаем красивую HTML страницу
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     return templates.TemplateResponse(request, "index.html")

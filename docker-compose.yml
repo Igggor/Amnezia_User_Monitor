@@ -4,13 +4,14 @@ services:
   amnezia-monitor:
     build: .
     container_name: amnezia-monitor
-    restart: unless-stopped
     ports:
       - "8080:8000"
     volumes:
-      - ./data:/app/data
-      # Пробрасываем сокет Docker, чтобы вызывать `wg show dump` внешнего контейнера
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./app:/app/app
+      - ./data:/app/data
     environment:
-      - AMNEZIA_CONTAINER_NAME=amnezia-awg
       - WG_INTERFACE=wg0
+      - DB_PATH=data/monitor.db
+    restart: always
+
