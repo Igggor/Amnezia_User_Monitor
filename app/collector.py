@@ -1,7 +1,7 @@
 import subprocess
-from app.config import AMNEZIA_CONTAINER_NAME, WG_INTERFACE
-from app.parser import parse_wg_dump
-from app.database import save_metrics
+from config import AMNEZIA_CONTAINER_NAME, WG_INTERFACE
+from parser import parse_wg_dump
+from database import save_metrics
 
 
 def fetch_wg_dump() -> str:

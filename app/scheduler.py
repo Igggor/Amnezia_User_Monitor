@@ -1,5 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-from app.collector import collect_and_store_metrics
+from collector import collect_and_store_metrics
 
 scheduler = BackgroundScheduler()
 

@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.config import DB_PATH
-from app.models import Base, Client, TrafficHistory
+from config import DB_PATH
+from models import Base, Client, TrafficHistory
 from datetime import datetime
 
 DATABASE_URL = f"sqlite:///{DB_PATH}"

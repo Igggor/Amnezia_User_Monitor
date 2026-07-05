@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from app.database import init_db
-from app.scheduler import start_scheduler, shutdown_scheduler
-from app.api.clients import router as clients_router
+from database import init_db
+from scheduler import start_scheduler, shutdown_scheduler
+from api.clients import router as clients_router
 
 
 @asynccontextmanager
