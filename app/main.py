@@ -35,4 +35,4 @@ app.include_router(clients_router)
 # Вместо старого read_root отдаем красивую HTML страницу
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", context={"request": request})
