@@ -11,31 +11,29 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def init_db():
-    """Создает таблицы, если они еще не созданы."""
     Base.metadata.create_all(bind=engine)
 
 
 def save_metrics(parsed_peers: list):
-    """Принимает список разобранных пиров и сохраняет их в БД."""
     db = SessionLocal()
     try:
         current_time = datetime.utcnow()
         for peer in parsed_peers:
-            # 1. Проверяем, есть ли клиент в базе, или создаем нового
             client = db.query(Client).filter(Client.public_key == peer['public_key']).first()
             if not client:
                 client = Client(
                     public_key=peer['public_key'],
                     ip=peer['allowed_ips'],
-                    name=None  # Имя подтянется позже из config.yaml или веб-панели
+                    name=None
                 )
                 db.add(client)
-                db.flush()  # Получаем client.id
+                db.flush()
 
-            # Обновляем IP на случай, если он изменился в конфигах Amnezia
+            # Обновляем динамические данные клиента из дампа
             client.ip = peer['allowed_ips']
+            client.latest_handshake = peer['latest_handshake']  # Сохраняем реальный хэндшейк
 
-            # 2. Записываем исторический снимок трафика
+            # Записываем историю трафика
             history_entry = TrafficHistory(
                 client_id=client.id,
                 rx=peer['rx_bytes'],

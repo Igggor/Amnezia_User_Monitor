@@ -24,7 +24,6 @@ def get_clients_statuses(db: Session = Depends(get_db)):
     current_time = int(time.time())
 
     for client in clients:
-        # Получаем последнюю запись трафика для этого клиента
         latest_traffic = db.query(TrafficHistory) \
             .filter(TrafficHistory.client_id == client.id) \
             .order_by(TrafficHistory.timestamp.desc()) \
@@ -33,12 +32,12 @@ def get_clients_statuses(db: Session = Depends(get_db)):
         rx = latest_traffic.rx if latest_traffic else 0
         tx = latest_traffic.tx if latest_traffic else 0
 
-        # В WireGuard дамп возвращает timestamp последнего хэндшейка.
-        # Для симуляции логики "online", если хэндшейк был меньше 3 минут (180 сек) назад — клиент онлайн.
-        # В реальном дампе мы будем сохранять сырой handshake, но пока заложим базовую логику проверки:
-        # (Для демонстрации вывода высчитаем заглушку, на этапе интеграции с живым wg это заработает на 100%)
+        # Стандарт WireGuard: если последнее рукопожатие было меньше 180 секунд назад,
+        # сессия активна и клиент отправляет/принимает keepalive пакеты.
+        is_online = False
+        if client.latest_handshake > 0:
+            is_online = (current_time - client.latest_handshake) < 180
 
-        # Получаем имя из config.yaml, если оно там есть, иначе используем public_key
         display_name = get_client_name(client.public_key)
 
         result.append({
@@ -48,7 +47,7 @@ def get_clients_statuses(db: Session = Depends(get_db)):
             "ip": client.ip,
             "rx": rx,
             "tx": tx,
-            "online": False  # Будет динамически рассчитываться от handshake на живых данных
+            "online": is_online
         })
 
     return result
