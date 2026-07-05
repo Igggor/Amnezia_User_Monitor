@@ -1,15 +1,15 @@
-FROM python:3.11-alpine
+FROM python:3.11-slim
 
-RUN apk add --no-cache docker-cli
+# Устанавливаем системные утилиты, включая wireguard-tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wireguard-tools \
+    && rm -rf /var/lib/apt/lists/*
 
-# Копируем всё содержимое нашей локальной папки app в корень контейнера /app
 WORKDIR /app
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./app .
+COPY . .
 
-EXPOSE 8000
-
-# Запускаем uvicorn напрямую, так как main.py лежит в корне /app
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
