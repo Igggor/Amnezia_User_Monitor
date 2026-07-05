@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amnezia Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+
+    <!-- Навбар -->
+    <nav class="bg-gray-800 border-b border-gray-700 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wider text-green-400">🔒 AMNEZIA MONITOR</h1>
+            <span class="text-sm bg-gray-700 px-3 py-1 rounded-full text-gray-300">Server: Online</span>
+        </div>
+    </nav>
+
+    <!-- Основной контейнер -->
+    <main class="container mx-auto p-4 max-w-4xl">
+
+        <!-- Сетка статуса сервера -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                <p class="text-gray-400 text-sm">Всего клиентов</p>
+                <p id="total-clients" class="text-2xl font-bold text-white">0</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                <p class="text-gray-400 text-sm">В сети</p>
+                <p id="online-clients" class="text-2xl font-bold text-green-400">0</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                <p class="text-gray-400 text-sm">Обновлено</p>
+                <p id="last-update" class="text-2xl font-bold text-blue-400">Только что</p>
+            </div>
+        </div>
+
+        <!-- Список VPN клиентов -->
+        <div class="bg-gray-800 rounded-lg border border-gray-700 p-4">
+            <h2 class="text-lg font-semibold mb-4 text-gray-300 border-b border-gray-700 pb-2">Список подключений</h2>
+            <div id="clients-container" class="space-y-4">
+                <!-- Сюда JS будет вставлять карточки клиентов -->
+                <p class="text-gray-500 text-center py-4">Загрузка данных...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
