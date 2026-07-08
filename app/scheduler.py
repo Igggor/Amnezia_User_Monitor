@@ -1,7 +1,7 @@
 import os
 from apscheduler.schedulers.background import BackgroundScheduler
 from prometheus_client import Counter
-from database import save_metrics
+from database import save_metrics, clean_old_metrics
 from config import get_client_name
 
 scheduler = BackgroundScheduler()
@@ -77,9 +77,24 @@ def collect_job():
         save_metrics(peers)
 
 
+def cleanup_job():
+    """Задача очистки старых метрик (храним историю 3 дня)"""
+    print("[Scheduler] Запуск ежедневной очистки базы данных...")
+    clean_old_metrics(days_to_keep=3)
+
 def start_scheduler():
     if not scheduler.running:
         scheduler.add_job(collect_job, 'interval', seconds=5, id='wg_collector_job')
+
+        scheduler.add_job(
+            cleanup_job,
+            'cron',
+            hour=4,
+            minute=0,
+            id='db_cleanup_job',
+            replace_existing=True
+        )
+
         scheduler.start()
         print("Планировщик сбора метрик успешно запущен (интервал: 5с).")
 
