@@ -22,6 +22,8 @@ CLIENTS_MAPPING = {
     "Rw4He46Nf6HZNR1mTHgnCMqf4jYRXg8fmClVPgqGtHw=": "Vlad1",
     "kUNmzB7sgCeZ6S++iajiS4x/hgUHqm7eYluDdSDJjHk=": "Vlad2",
     "2+OPltlAu3JSuSjsJ7EmVqKCbNYBlFAEYeNj3F1KRV8=": "Olya",
+    "TEXB0W0/dY2zpxDkK4t/Az43GF122sWddyNbX/BJ+1E=": "Mama",
+    "t5w/GVcHEEf3ojYn/rSiGnmBI5XaEUwfygraIGNS8Rs=": "IgreedaPhone",
 }
 
 # Создаем директорию для данных, если её нет
